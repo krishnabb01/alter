@@ -1,0 +1,198 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 34
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bitbarshi          |
+| india_population   |
+| information_schema |
+| jspm_barshi        |
+| mysql              |
+| performance_schema |
+| sys                |
+| tblstudent         |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use jspmbarshi;
+ERROR 1049 (42000): Unknown database 'jspmbarshi'
+mysql> use jspm_barshi;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_jspm_barshi |
++-----------------------+
+| tblempolyee           |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> use tblempolyee;
+ERROR 1049 (42000): Unknown database 'tblempolyee'
+mysql> select * from tblempolyee;
+Empty set (0.00 sec)
+
+mysql> use india_population;
+Database changed
+mysql> show tables;
++----------------------------+
+| Tables_in_india_population |
++----------------------------+
+| tblindia_population        |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from tblindia
+    -> ^C
+mysql> select * from tblindia_population;
+Empty set (0.00 sec)
+
+mysql> use bitbarshi;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_bitbarshi |
++---------------------+
+| tbls1               |
+| tblstudent          |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tbls1;
++----+---------+------+---------+
+| id | name    | age  | sallary |
++----+---------+------+---------+
+|  1 | krishna |   20 | 1000000 |
+|  2 | lucy    |   21 | 1000000 |
+|  3 | mohan   |   22 | 2000000 |
+|  4 | rohit   |   25 | 2000000 |
+|  5 | shubham |   31 |  300000 |
++----+---------+------+---------+
+5 rows in set (0.00 sec)
+
+mysql> alter table tbls1 add state varchar(50);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tbls1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tbls1' at line 1
+mysql> desc tbls1;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50) | NO   |     | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| sallary | int         | YES  |     | NULL    |                |
+| state   | varchar(50) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table tbls1 add dept varchar(50) after id;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tbls1;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| dept    | varchar(50) | YES  |     | NULL    |                |
+| name    | varchar(50) | NO   |     | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| sallary | int         | YES  |     | NULL    |                |
+| state   | varchar(50) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table tbls1 modify dept_id int;
+ERROR 1054 (42S22): Unknown column 'dept_id' in 'tbls1'
+mysql> alter table tbls1 modify dept int;
+Query OK, 5 rows affected (0.05 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc tbls1;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| dept    | int         | YES  |     | NULL    |                |
+| name    | varchar(50) | NO   |     | NULL    |                |
+| age     | int         | YES  |     | NULL    |                |
+| sallary | int         | YES  |     | NULL    |                |
+| state   | varchar(50) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table tbls1 drop sallary;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tbls1;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| dept  | int         | YES  |     | NULL    |                |
+| name  | varchar(50) | NO   |     | NULL    |                |
+| age   | int         | YES  |     | NULL    |                |
+| state | varchar(50) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table tbls1 modify dept varchar (500;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table tbls1 modify dept varchar (500);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc tbls1;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| dept  | varchar(500) | YES  |     | NULL    |                |
+| name  | varchar(50)  | NO   |     | NULL    |                |
+| age   | int          | YES  |     | NULL    |                |
+| state | varchar(50)  | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table tbls1 modify age varchar(50);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc tbls1;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int          | NO   | PRI | NULL    | auto_increment |
+| dept  | varchar(500) | YES  |     | NULL    |                |
+| name  | varchar(50)  | NO   |     | NULL    |                |
+| age   | varchar(50)  | YES  |     | NULL    |                |
+| state | varchar(50)  | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from tbls1;
++----+------+---------+------+-------+
+| id | dept | name    | age  | state |
++----+------+---------+------+-------+
+|  1 | NULL | krishna | 20   | NULL  |
+|  2 | NULL | lucy    | 21   | NULL  |
+|  3 | NULL | mohan   | 22   | NULL  |
+|  4 | NULL | rohit   | 25   | NULL  |
+|  5 | NULL | shubham | 31   | NULL  |
++----+------+---------+------+-------+
+5 rows in set (0.00 sec)
